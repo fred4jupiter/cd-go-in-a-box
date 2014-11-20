@@ -1,0 +1,9 @@
+goserver:
+  build: goserver
+  ports:
+    - "8153:8153"
+    - "8154:8154"
+goagent:
+  build: goagent    
+  links:
+    - goserver
