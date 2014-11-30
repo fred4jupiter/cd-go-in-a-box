@@ -12,13 +12,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
 	vb.customize ["modifyvm", :id, "--cpus", "4"]
   end
-  config.vm.provision "shell", inline: "apt-get update && apt-get upgrade -y && apt-get install -y git && apt-get install -y ansible"  
-  config.vm.provision "shell", path: "fig-up.sh"
+  config.vm.provision "shell", inline: "apt-get update && apt-get upgrade -y && apt-get install -y git && apt-get install -y dos2unix"  
+  config.vm.provision "shell", path: "fig-install.sh"
   config.vm.provision "docker" do |d|
 	d.run "crosbymichael/skydns",
 		args: "-p 172.17.42.1:53:53/udp --name skydns crosbymichael/skydns -nameserver 8.8.8.8:53 -domain docker"
 	d.run "crosbymichael/skydock",
 		args: "-v /var/run/docker.sock:/docker.sock --name skydock crosbymichael/skydock -ttl 30 -environment dev -s /docker.sock -domain docker -name skydns"
   end  
-  config.vm.provision "shell", inline: "cd /vagrant/docker-go && fig up -d"
+  config.vm.provision "shell", inline: "cd /vagrant && fig up -d"  
 end

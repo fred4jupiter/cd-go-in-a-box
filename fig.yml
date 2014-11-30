@@ -3,7 +3,9 @@ goserver:
   ports:
     - "8153:8153"
     - "8154:8154"
+  dns: 172.17.42.1
 goagent:
   build: goagent    
   links:
     - goserver
+  dns: 172.17.42.1

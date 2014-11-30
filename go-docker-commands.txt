@@ -1,7 +1,0 @@
-docker pull extraordinaire/docker-gocd-server
-docker run -d -p 8153:8153 -name gocd-server extraordinaire/docker-gocd-server
-
-docker pull extraordinaire/docker-gocd-agent
-docker run -d -link gocd-server:server extraordinaire/docker-gocd-agent
-
-docker run -d extraordinaire/docker-gocd-agent -e SERVER_PORT_8153_TCP_ADDR=<HOST OF GOCD SERVER> -e SERVER_PORT_8153_TCP_PORT=<PORT SERVER LISTENING ON>
